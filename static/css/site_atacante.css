@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: #20124d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+}
+
+@keyframes blink {
+    0% {
+        background-color: #f4b400ff;
+        color: black;
+    }
+
+    50% {
+        background-color: red;
+        color: white;
+    }
+
+    100% {
+        background-color: #f4b400ff;
+        color: black;    
+    }
+}
+
+button {
+    padding: 1rem;
+    font-weight: 1rem;
+    font-size: 32px;
+    border-radius: 10px;
+    background-color: #f4b400ff;
+    border: none;
+    outline: none;
+    animation: blink 2s infinite;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+p {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}

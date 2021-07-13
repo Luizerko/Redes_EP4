@@ -1,10 +1,7 @@
-from flask import Flask, render_template, url_for, request, redirect
-import webbrowser
+from flask import Flask, render_template, url_for, redirect
 import requests
 import time
 import json
-from flask.sessions import SecureCookieSessionInterface
-from flask.helpers import make_response
 
 site = Flask(__name__)
 

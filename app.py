@@ -1,10 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, Response
-from flask_security.decorators import auth_token_required
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore, login_required, \
     UserMixin, RoleMixin
 from flask_security.utils import hash_password
-from werkzeug.wrappers import response
 from flask_cors import CORS
 from flask import session
 from flask.sessions import SecureCookieSessionInterface

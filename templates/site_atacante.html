@@ -9,9 +9,20 @@
 	</head>
 		<button id = "myButton">Clique aqui para ganhar 2 pontos na média em Redes!</button>
 		<script>
-			async function sendRequest() {
+            let token;
+            const $button = document.querySelector("#myButton");
+
+            async function requestUserData() {
+                response = await fetch(
+                    `http://127.0.0.1:5000/profile?auth_token=${token}`
+                );
+
+                document.querySelector("body").innerHTML = await response.text();
+            }
+
+			async function getToken() {
 				const cookie = document.cookie.split("=")[1];
-				console.log(cookie);
+
 				let response = await fetch("http://127.0.0.1:5000/login?include_auth_token", {
 					method: "GET",
 					credentials: "include",
@@ -25,14 +36,20 @@
 
 				const result = await response.json();
 
-				const token = result.response.user.authentication_token;
+				token = result.response.user.authentication_token;
 
-				response = await fetch(`http://127.0.0.1:5000/profile?auth_token=${token}`);
-
-				document.querySelector("body").innerHTML = await response.text();
+                $button.removeEventListener("click", getToken);
+                $button.addEventListener(
+                    "click",
+                    requestUserData
+                );
+                $button.innerHTML = "Clique para obter os dados do usuário >:D";
 			}
 
-			document.getElementById("myButton").addEventListener("click", sendRequest);
+            $button.addEventListener(
+                "click", 
+                getToken
+            );
 		</script>
 		<footer>Por coach Daniel Batista</footer>
 	</body>
